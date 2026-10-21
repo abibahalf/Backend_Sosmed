@@ -1,6 +1,6 @@
 import prisma from "../utils/prisma.js"
 import * as z from "zod"; 
-
+import cloudinary from "../utils/cloudinary.js";
 
 
 export const getUserbyUsername = async (req, res) => {
@@ -129,5 +129,72 @@ export const  updateUser = async (req, res) => {
         //error dari express
         console.log(error);
         res.status(500).json({message: 'Server Down'});
+    }
+}
+
+
+export const updateAvatar = async (req, res ) => {
+
+    try {
+        //validation file
+        if (!req.file) {
+            return res.status(400).json({
+                message: "Belum ada gambar yang diinput",
+            })
+        }
+
+
+        //get current dari user id
+        const currentUser = await prisma.user.findUnique({
+            where:{
+                id: req.user.id
+            }
+        })
+
+        // validation 2 kita buat fungsi untuk hapus gambar lama
+        if (currentUser.imageId) {
+            await cloudinary.uploader.destroy(currentUser.imageId)
+        }
+
+        //upload gambar dengan buffer multer
+        const fileStr = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`
+
+        const result = await cloudinary.uploader.upload(fileStr, {
+            folder: 'avatar',
+            transformation: [{
+                width: 300,
+                height: 300
+            }]
+        })
+        //update user image dan imageId di database table users
+        const updataeUser = await prisma.user.update({
+            where: {
+                id:req.user.id
+            },
+            data: {
+                image: result.secure_url,
+                imageId: result.public_id
+            },
+            omit: {
+                password: true
+            }
+        })
+
+
+        //res success
+        res.status(200).json({
+            message: "Update Photo Profile Berhasil",
+            data: updataeUser
+        })
+        
+
+    }catch (error) {
+        console.log(error);
+
+        res.status(500).json ({
+            message : "server down",
+            error
+
+        })
     }
 }
