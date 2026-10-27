@@ -158,7 +158,6 @@ exports.Prisma.CommentScalarFieldEnum = {
 exports.Prisma.BookmarkScalarFieldEnum = {
   postId: 'postId',
   userId: 'userId',
-  content: 'content',
   createdAt: 'createdAt'
 };
 
