@@ -6240,21 +6240,18 @@ export namespace Prisma {
   export type LikesMinAggregateOutputType = {
     postId: number | null
     userId: number | null
-    content: string | null
     createdAt: Date | null
   }
 
   export type LikesMaxAggregateOutputType = {
     postId: number | null
     userId: number | null
-    content: string | null
     createdAt: Date | null
   }
 
   export type LikesCountAggregateOutputType = {
     postId: number
     userId: number
-    content: number
     createdAt: number
     _all: number
   }
@@ -6273,21 +6270,18 @@ export namespace Prisma {
   export type LikesMinAggregateInputType = {
     postId?: true
     userId?: true
-    content?: true
     createdAt?: true
   }
 
   export type LikesMaxAggregateInputType = {
     postId?: true
     userId?: true
-    content?: true
     createdAt?: true
   }
 
   export type LikesCountAggregateInputType = {
     postId?: true
     userId?: true
-    content?: true
     createdAt?: true
     _all?: true
   }
@@ -6381,7 +6375,6 @@ export namespace Prisma {
   export type LikesGroupByOutputType = {
     postId: number
     userId: number
-    content: string
     createdAt: Date
     _count: LikesCountAggregateOutputType | null
     _avg: LikesAvgAggregateOutputType | null
@@ -6407,7 +6400,6 @@ export namespace Prisma {
   export type LikesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     postId?: boolean
     userId?: boolean
-    content?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
@@ -6416,7 +6408,6 @@ export namespace Prisma {
   export type LikesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     postId?: boolean
     userId?: boolean
-    content?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
@@ -6425,7 +6416,6 @@ export namespace Prisma {
   export type LikesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     postId?: boolean
     userId?: boolean
-    content?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
@@ -6434,11 +6424,10 @@ export namespace Prisma {
   export type LikesSelectScalar = {
     postId?: boolean
     userId?: boolean
-    content?: boolean
     createdAt?: boolean
   }
 
-  export type LikesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"postId" | "userId" | "content" | "createdAt", ExtArgs["result"]["likes"]>
+  export type LikesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"postId" | "userId" | "createdAt", ExtArgs["result"]["likes"]>
   export type LikesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     post?: boolean | PostDefaultArgs<ExtArgs>
@@ -6461,7 +6450,6 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       postId: number
       userId: number
-      content: string
       createdAt: Date
     }, ExtArgs["result"]["likes"]>
     composites: {}
@@ -6890,7 +6878,6 @@ export namespace Prisma {
   interface LikesFieldRefs {
     readonly postId: FieldRef<"Likes", 'Int'>
     readonly userId: FieldRef<"Likes", 'Int'>
-    readonly content: FieldRef<"Likes", 'String'>
     readonly createdAt: FieldRef<"Likes", 'DateTime'>
   }
     
@@ -8454,7 +8441,6 @@ export namespace Prisma {
   export const LikesScalarFieldEnum: {
     postId: 'postId',
     userId: 'userId',
-    content: 'content',
     createdAt: 'createdAt'
   };
 
@@ -8868,7 +8854,6 @@ export namespace Prisma {
     NOT?: LikesWhereInput | LikesWhereInput[]
     postId?: IntFilter<"Likes"> | number
     userId?: IntFilter<"Likes"> | number
-    content?: StringFilter<"Likes"> | string
     createdAt?: DateTimeFilter<"Likes"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
@@ -8877,7 +8862,6 @@ export namespace Prisma {
   export type LikesOrderByWithRelationInput = {
     postId?: SortOrder
     userId?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
     post?: PostOrderByWithRelationInput
@@ -8890,7 +8874,6 @@ export namespace Prisma {
     NOT?: LikesWhereInput | LikesWhereInput[]
     postId?: IntFilter<"Likes"> | number
     userId?: IntFilter<"Likes"> | number
-    content?: StringFilter<"Likes"> | string
     createdAt?: DateTimeFilter<"Likes"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
@@ -8899,7 +8882,6 @@ export namespace Prisma {
   export type LikesOrderByWithAggregationInput = {
     postId?: SortOrder
     userId?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
     _count?: LikesCountOrderByAggregateInput
     _avg?: LikesAvgOrderByAggregateInput
@@ -8914,7 +8896,6 @@ export namespace Prisma {
     NOT?: LikesScalarWhereWithAggregatesInput | LikesScalarWhereWithAggregatesInput[]
     postId?: IntWithAggregatesFilter<"Likes"> | number
     userId?: IntWithAggregatesFilter<"Likes"> | number
-    content?: StringWithAggregatesFilter<"Likes"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Likes"> | Date | string
   }
 
@@ -9279,7 +9260,6 @@ export namespace Prisma {
   }
 
   export type LikesCreateInput = {
-    content: string
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutLikesInput
     post: PostCreateNestedOneWithoutLikesInput
@@ -9288,12 +9268,10 @@ export namespace Prisma {
   export type LikesUncheckedCreateInput = {
     postId: number
     userId: number
-    content: string
     createdAt?: Date | string
   }
 
   export type LikesUpdateInput = {
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutLikesNestedInput
     post?: PostUpdateOneRequiredWithoutLikesNestedInput
@@ -9302,26 +9280,22 @@ export namespace Prisma {
   export type LikesUncheckedUpdateInput = {
     postId?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LikesCreateManyInput = {
     postId: number
     userId: number
-    content: string
     createdAt?: Date | string
   }
 
   export type LikesUpdateManyMutationInput = {
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LikesUncheckedUpdateManyInput = {
     postId?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9734,7 +9708,6 @@ export namespace Prisma {
   export type LikesCountOrderByAggregateInput = {
     postId?: SortOrder
     userId?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -9746,14 +9719,12 @@ export namespace Prisma {
   export type LikesMaxOrderByAggregateInput = {
     postId?: SortOrder
     userId?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
   }
 
   export type LikesMinOrderByAggregateInput = {
     postId?: SortOrder
     userId?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -10536,14 +10507,12 @@ export namespace Prisma {
   }
 
   export type LikesCreateWithoutUserInput = {
-    content: string
     createdAt?: Date | string
     post: PostCreateNestedOneWithoutLikesInput
   }
 
   export type LikesUncheckedCreateWithoutUserInput = {
     postId: number
-    content: string
     createdAt?: Date | string
   }
 
@@ -10702,7 +10671,6 @@ export namespace Prisma {
     NOT?: LikesScalarWhereInput | LikesScalarWhereInput[]
     postId?: IntFilter<"Likes"> | number
     userId?: IntFilter<"Likes"> | number
-    content?: StringFilter<"Likes"> | string
     createdAt?: DateTimeFilter<"Likes"> | Date | string
   }
 
@@ -10815,14 +10783,12 @@ export namespace Prisma {
   }
 
   export type LikesCreateWithoutPostInput = {
-    content: string
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutLikesInput
   }
 
   export type LikesUncheckedCreateWithoutPostInput = {
     userId: number
-    content: string
     createdAt?: Date | string
   }
 
@@ -11649,7 +11615,6 @@ export namespace Prisma {
 
   export type LikesCreateManyUserInput = {
     postId: number
-    content: string
     createdAt?: Date | string
   }
 
@@ -11737,20 +11702,17 @@ export namespace Prisma {
   }
 
   export type LikesUpdateWithoutUserInput = {
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     post?: PostUpdateOneRequiredWithoutLikesNestedInput
   }
 
   export type LikesUncheckedUpdateWithoutUserInput = {
     postId?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LikesUncheckedUpdateManyWithoutUserInput = {
     postId?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -11793,7 +11755,6 @@ export namespace Prisma {
 
   export type LikesCreateManyPostInput = {
     userId: number
-    content: string
     createdAt?: Date | string
   }
 
@@ -11824,20 +11785,17 @@ export namespace Prisma {
   }
 
   export type LikesUpdateWithoutPostInput = {
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutLikesNestedInput
   }
 
   export type LikesUncheckedUpdateWithoutPostInput = {
     userId?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LikesUncheckedUpdateManyWithoutPostInput = {
     userId?: IntFieldUpdateOperationsInput | number
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

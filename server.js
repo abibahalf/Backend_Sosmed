@@ -5,6 +5,8 @@ import userRouter  from './routes/user.route.js'
 import followRouter from './routes/follow.route.js'
 import FeedRouter from './routes/feed.route.js'
 import commentRouter from './routes/comment.route.js'
+import LikeRouteer from './routes/like.route.js'
+import prisma from './utils/prisma.js'
 
 
 const app = express()
@@ -18,6 +20,7 @@ app.use('/api/user', userRouter);
 app.use('/api/follow', followRouter);
 app.use('/api/feed', FeedRouter);
 app.use('/api/comment', commentRouter );
+app.use('/api/like', LikeRouteer );
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
