@@ -196,7 +196,6 @@ export const followUserAccount = async (req, res) => {
     }
  }
 
-
  export const isFollowUser = async (req,res) => {
 
     try {

@@ -14,6 +14,24 @@ export const getUserbyUsername = async (req, res) => {
             omit: {
                 password: true,
                 imageId: true
+            },
+            include: {
+                posts: {
+                    omit: {
+                        userId: true,
+                        imageId: true
+                    }
+                },
+                bookmarks: {
+                    include: {
+                        post: {
+                            omit: {
+                                userId : true,
+                                imageId: true
+                            }
+                        }
+                    }
+                }
             }
         })
 
@@ -66,8 +84,6 @@ export const getSearchUser = async (req, res) => {
         data: users
     })
 }
-
-
 
 
 export const  updateUser = async (req, res) => {
