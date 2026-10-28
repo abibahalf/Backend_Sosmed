@@ -63,6 +63,8 @@ export const registerUser = async (req, res) => {
             }
         });
 
+        const jwtSecret = process.env.JWT_SECRET
+
         const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, { expiresIn: '6h' });
 
         return res.status(201).json({

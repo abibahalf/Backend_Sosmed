@@ -86,6 +86,115 @@ export const followUserAccount = async (req, res) => {
     }
 }
 
+ export const unfollowUserAcount = async (req, res) =>{
+    const {unfollowUserId} = req.params 
+    const currentUserId =req.user.id
 
-git add controller/user.controller.js routes/user.route.js server.js utils/cloudinary.js controller/follow.controller.js routes/follow.route.js
+    const userUnfollow = await prisma.user.findUnique({
+        where:{
+            id: Number(unfollowUserId)
+        }
+    })
 
+    if (!userUnfollow){
+        return res.status(400).json({
+            message: " User Tidak Ditemukan"
+        })
+    }
+
+    try {
+        await prisma.follow.delete({
+            where: {
+                followerId_followingId :{
+                followerId : Number(unfollowUserId),
+                followingId: Number(currentUserId)
+            }
+            }
+            
+        })
+
+
+        //update count user following dan follower
+        await prisma.user.update({
+            where:{
+                id: currentUserId
+            },
+            data: {
+                followingCount: {
+                    decrement:  1
+                }
+            }
+        })
+
+        await prisma.user.update({
+            where:{
+                id: Number(unfollowUserId)
+            },
+            data: {
+                followerCount: {
+                    decrement:  1
+                }
+            }
+        })
+
+        res.status(200).json({
+            message: "User Berhasil Di Unfollow"
+        })
+        
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            message: "server down",
+            error
+        })
+        
+    }
+ }
+
+ export const getLimitUser = async (req,res) => {
+
+    try {
+        const currentUserId = req.user.id
+
+        const followedUser = await prisma.follow.findMany({
+            where: { followerId: currentUserId},
+            select: { followerId: true}
+        })
+
+        const followedIds = followedUser.map(f => f.followingId)
+
+        const users = await prisma.user.findMany({
+            where : {
+                id: {
+                    notIn: [...followedIds, currentUserId]
+                }
+            },
+            select: {
+                id:true,
+                image: true,
+                fullname: true,
+                username: true
+            },
+            take: 5,
+            orderBy:{
+                createdAt: "desc"
+            }
+        })
+
+        res.status(200).json({
+            message: "5 user yang belum di follow",
+            data: users
+        })
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "server down",
+            error
+        })
+    }
+ }
+
+
+ //  terakhir di menit 3.38.00
