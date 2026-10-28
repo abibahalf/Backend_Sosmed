@@ -165,7 +165,6 @@ exports.Prisma.BookmarkScalarFieldEnum = {
 exports.Prisma.LikesScalarFieldEnum = {
   postId: 'postId',
   userId: 'userId',
-  content: 'content',
   createdAt: 'createdAt'
 };
 
