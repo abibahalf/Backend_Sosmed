@@ -197,4 +197,48 @@ export const followUserAccount = async (req, res) => {
  }
 
 
- //  terakhir di menit 3.38.00
+ export const isFollowUser = async (req,res) => {
+
+    try {
+        const currentUserId = req.user.id
+        const {followUserId} = req.params
+
+        const checkFollowUserId = await prisma.user.findUnique({
+            where: {
+                id: Number(followUserId)
+            }
+        })
+
+        if(!checkFollowUserId){
+            return res.status(404).json({
+                message: "User Tidak Ditemukan"
+            })
+        }
+
+        const isFollowUserData = await prisma.follow.findUnique({
+            where: {
+                followerId_followingId: {
+                    followerId: Number(followUserId),
+                    followingId: currentUserId
+                }
+            }
+        })
+
+        if(isFollowUserData) {
+            return res.status(200).json({
+                data:true
+            })
+        }
+
+        return res.status(200).json({
+            data: false
+        })
+        
+
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server Down"
+        })
+    }
+}
